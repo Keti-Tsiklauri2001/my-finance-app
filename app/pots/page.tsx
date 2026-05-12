@@ -1,3 +1,9 @@
+import Header from "../components/Header";
+
 export default function Pots() {
-  return <div>Pots Page</div>;
+  return (
+    <div>
+      <Header header="pots" buttonText="add new pot" />
+    </div>
+  );
 }

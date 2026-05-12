@@ -1,3 +1,9 @@
+import Header from "../components/Header";
+
 export default function RecurringBills() {
-  return <div>recurring Page</div>;
+  return (
+    <div>
+      <Header header="recurring bills" />
+    </div>
+  );
 }

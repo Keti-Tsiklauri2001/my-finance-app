@@ -15,7 +15,9 @@ export default function Button({ text }: ButtonProps) {
         rounded-[8px]
       "
     >
-      <p className="text-white text-[14px] leading-[150%] font-bold">{text}</p>
+      <p className="text-white text-[14px] leading-[150%] font-bold capitalize">
+        {text}
+      </p>
     </button>
   );
 }
