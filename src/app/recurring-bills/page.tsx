@@ -1,5 +1,4 @@
-import Header from "../components/Header";
-
+import Header from "@/src/components/Header";
 export default function RecurringBills() {
   return (
     <div>
