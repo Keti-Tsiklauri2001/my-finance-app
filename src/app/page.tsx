@@ -1,9 +1,3 @@
-import Button from "./components/Button";
-
 export default function Home() {
-  return (
-    <div>
-      <Button text="create" />
-    </div>
-  );
+  return <div></div>;
 }

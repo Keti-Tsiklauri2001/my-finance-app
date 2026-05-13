@@ -1,24 +1,14 @@
-// BudgetCard.tsx
-
-import { budgets } from "@/data/data-budgets";
-import { transactions } from "./data-transactions";
+import { budgets } from "../data/data-budgets";
+import { calculateBudgets } from "../utils/calcBudgets";
+import { BudgetWithData } from "../types/types";
 
 export default function BudgetCard() {
+  const budgetsWithData = calculateBudgets(budgets);
+
   return (
     <div className="flex flex-col gap-6">
-      {budgets.map((budget, index) => {
-        const filteredTransactions = transactions.filter(
-          (transaction) => transaction.category === budget.category,
-        );
-
-        const spent = filteredTransactions.reduce(
-          (acc, current) => acc + Math.abs(current.amount),
-          0,
-        );
-
-        const free = budget.maximum - spent;
-
-        const percentage = (spent / budget.maximum) * 100;
+      {budgetsWithData.map((budget: BudgetWithData, index) => {
+        const { transactions, spent, free, percentage } = budget;
 
         return (
           <div
@@ -26,42 +16,39 @@ export default function BudgetCard() {
             className="
               bg-white
               rounded-[12px]
-              p-8
-              flex
-              flex-col
-              gap-5
+              flex flex-col gap-5
               w-full
-              max-w-[608px]
+              max-w-[343px]
+              md:max-w-[608px]
+              p-5 md:p-6
             "
           >
-            {/* Header */}
+            {/* HEADER */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div
                   className="w-4 h-4 rounded-full"
-                  style={{
-                    backgroundColor: budget.theme,
-                  }}
+                  style={{ backgroundColor: budget.theme }}
                 />
 
-                <h2 className="text-[20px] leading-[120%] font-bold text-[#201F24]">
+                <h2 className="text-[20px] font-bold text-[#201F24]">
                   {budget.category}
                 </h2>
               </div>
 
-              <button className="text-[#696868]">...</button>
+              <button className="text-[#696868] text-lg">...</button>
             </div>
 
-            {/* Progress */}
+            {/* MAX + PROGRESS */}
             <div className="flex flex-col gap-4">
               <p className="text-[14px] text-[#696868]">
                 Maximum of ${budget.maximum.toFixed(2)}
               </p>
 
-              {/* Progress Bar */}
-              <div className="bg-[#F8F4F0] rounded-[4px] p-1 h-8">
+              {/* PROGRESS BAR */}
+              <div className="bg-[#F8F4F0] rounded-[4px] p-1 h-8 overflow-hidden">
                 <div
-                  className="h-full rounded-[4px]"
+                  className="h-full rounded-[4px] transition-all duration-300"
                   style={{
                     width: `${percentage}%`,
                     backgroundColor: budget.theme,
@@ -69,33 +56,29 @@ export default function BudgetCard() {
                 />
               </div>
 
-              {/* Spent / Free */}
-              <div className="flex items-center gap-4">
-                {/* Spent */}
-                <div className="flex flex-1 items-center gap-4">
+              {/* SPENT / FREE */}
+              <div className="flex gap-4">
+                {/* SPENT */}
+                <div className="flex flex-1 items-center gap-3">
                   <div
                     className="w-1 h-[43px] rounded-[8px]"
-                    style={{
-                      backgroundColor: budget.theme,
-                    }}
+                    style={{ backgroundColor: budget.theme }}
                   />
 
                   <div>
                     <p className="text-[12px] text-[#696868]">Spent</p>
-
                     <p className="text-[14px] font-bold text-[#201F24]">
                       ${spent.toFixed(2)}
                     </p>
                   </div>
                 </div>
 
-                {/* Free */}
-                <div className="flex flex-1 items-center gap-4">
+                {/* FREE */}
+                <div className="flex flex-1 items-center gap-3">
                   <div className="w-1 h-[43px] rounded-[8px] bg-[#F8F4F0]" />
 
                   <div>
                     <p className="text-[12px] text-[#696868]">Free</p>
-
                     <p className="text-[14px] font-bold text-[#201F24]">
                       ${free.toFixed(2)}
                     </p>
@@ -104,8 +87,8 @@ export default function BudgetCard() {
               </div>
             </div>
 
-            {/* Latest Spending */}
-            <div className="bg-[#F8F4F0] rounded-[12px] p-5 flex flex-col gap-5">
+            {/* LATEST SPENDING */}
+            <div className="bg-[#F8F4F0] rounded-[12px] p-4 flex flex-col gap-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-[16px] font-bold text-[#201F24]">
                   Latest Spending
@@ -115,28 +98,28 @@ export default function BudgetCard() {
               </div>
 
               <div className="flex flex-col gap-3">
-                {filteredTransactions.map((transaction) => (
-                  <div key={transaction.date}>
+                {transactions.slice(0, 3).map((t, i) => (
+                  <div key={i}>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-3">
                         <img
-                          src={transaction.avatar}
-                          alt={transaction.name}
+                          src={t.avatar}
                           className="w-8 h-8 rounded-full object-cover"
+                          alt={t.name}
                         />
 
                         <p className="text-[12px] font-bold text-[#201F24]">
-                          {transaction.name}
+                          {t.name}
                         </p>
                       </div>
 
                       <div className="text-right">
                         <p className="text-[12px] font-bold text-[#201F24]">
-                          ${Math.abs(transaction.amount).toFixed(2)}
+                          ${Math.abs(t.amount).toFixed(2)}
                         </p>
 
                         <p className="text-[12px] text-[#696868]">
-                          {new Date(transaction.date).toLocaleDateString()}
+                          {new Date(t.date).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
