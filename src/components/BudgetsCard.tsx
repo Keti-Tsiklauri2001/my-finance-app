@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function BudgetCard() {
   const budgetsWithData = calculateBudgets(budgets);
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 ">
       {budgetsWithData.map((budget: BudgetWithData, index) => {
         const { transactions, spent, free, percentage } = budget;
         console.log(transactions[0].avatar);
@@ -21,6 +21,7 @@ export default function BudgetCard() {
               max-w-[343px]
               md:max-w-[608px]
               p-5 md:p-6
+              mx-auto
             "
           >
             {/* HEADER */}

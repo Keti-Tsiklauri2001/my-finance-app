@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 const menuItems = [
   {
@@ -40,18 +41,46 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
     <>
       {/* ================= XL SIDEBAR ================= */}
-      <aside className="hidden xl:flex flex-col w-[300px] h-screen bg-[#201F24] rounded-r-2xl">
-        <div className="px-8 py-10">
+      <aside
+        className={`
+          hidden xl:flex flex-col h-screen bg-[#201F24]
+          rounded-r-2xl transition-all duration-500 ease-in-out
+          ${collapsed ? "w-[88px]" : "w-[300px]"}
+        `}
+      >
+        {/* LOGO */}
+        <div className="relative h-[21px] ml-8 mt-10 mb-10">
+          {/* LARGE LOGO */}
           <Image
             src="/images/logo-large.svg"
             alt="Logo"
             width={120}
             height={21}
+            className={`
+      absolute left-0 top-0 transition-all duration-300
+      ${collapsed ? "opacity-0 scale-95" : "opacity-100 scale-100"}
+    `}
+          />
+
+          {/* SMALL LOGO */}
+          <Image
+            src="/images/logo-small.svg"
+            alt="Logo"
+            width={20}
+            height={20}
+            className={`
+      absolute left-0 top-0 transition-all duration-300
+      ${collapsed ? "opacity-100 scale-100" : "opacity-0 scale-95"}
+    `}
           />
         </div>
+
+        {/* MENU */}
         <nav className="flex flex-col gap-1 pr-4 flex-1">
           {menuItems.map((item) => {
             const isActive = pathname === item.href;
@@ -61,9 +90,10 @@ export default function Sidebar() {
                 key={item.label}
                 onClick={() => router.push(item.href)}
                 className={`
-                  flex items-center gap-4 px-8 py-4 rounded-r-xl
+                  flex items-center py-4 rounded-r-xl
                   cursor-pointer transition-all duration-300 ease-out
                   hover:bg-white/5
+                  ${collapsed ? "justify-center px-0" : "gap-4 px-8"}
                   ${
                     isActive
                       ? "bg-[#F8F4F0] text-[#201F24] border-l-4 border-[#277C78]"
@@ -78,15 +108,39 @@ export default function Sidebar() {
                   height={24}
                 />
 
-                <span className="font-semibold">{item.label}</span>
+                {!collapsed && (
+                  <span className="font-semibold whitespace-nowrap">
+                    {item.label}
+                  </span>
+                )}
               </button>
             );
           })}
         </nav>
 
-        <div className="px-8 py-6 text-[#B3B3B3] text-sm cursor-pointer hover:text-white transition">
-          Minimize Menu
-        </div>
+        {/* MINIMIZE */}
+        <button
+          onClick={() => setCollapsed((prev) => !prev)}
+          className={`
+            flex items-center transition-all duration-300
+            text-[#B3B3B3] hover:text-white cursor-pointer
+            mb-6
+            ${collapsed ? "justify-center px-0" : "gap-4 px-8"}
+          `}
+        >
+          <Image
+            alt="sidebar"
+            width={20}
+            height={20}
+            src="/images/minimize-Sidebar.svg"
+            className={`
+              transition-transform duration-500
+              ${collapsed ? "rotate-180" : ""}
+            `}
+          />
+
+          {!collapsed && <span className="text-sm">Minimize Menu</span>}
+        </button>
       </aside>
 
       {/* ================= MD TABLET ================= */}

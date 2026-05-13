@@ -19,7 +19,7 @@ export default function Header({ header, buttonText }: HeaderProps) {
         h-[56px]
         self-stretch
         mx-auto
-        xl:float-right
+     
         xl:p-6
         xl:mt-4
       "
