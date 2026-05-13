@@ -47,7 +47,7 @@ export default function BudgetCircle({
   }, [budgets, total]);
 
   return (
-    <div className="relative w-[240px] h-[240px]">
+    <div className="relative w-[240px] h-[240px] mx-auto">
       {/* OUTER RING */}
       <div
         className="w-[240px] h-[240px] rounded-full transition-all duration-700 ease-out"

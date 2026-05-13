@@ -1,14 +1,14 @@
 import { budgets } from "../data/data-budgets";
 import { calculateBudgets } from "../utils/calcBudgets";
 import { BudgetWithData } from "../types/types";
-
+import Image from "next/image";
 export default function BudgetCard() {
   const budgetsWithData = calculateBudgets(budgets);
-
   return (
     <div className="flex flex-col gap-6">
       {budgetsWithData.map((budget: BudgetWithData, index) => {
         const { transactions, spent, free, percentage } = budget;
+        console.log(transactions[0].avatar);
 
         return (
           <div
@@ -102,10 +102,12 @@ export default function BudgetCard() {
                   <div key={i}>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <img
+                        <Image
                           src={t.avatar}
-                          className="w-8 h-8 rounded-full object-cover"
                           alt={t.name}
+                          width={32}
+                          height={32}
+                          className="rounded-full object-cover"
                         />
 
                         <p className="text-[12px] font-bold text-[#201F24]">

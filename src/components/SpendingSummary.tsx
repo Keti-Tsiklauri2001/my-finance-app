@@ -1,15 +1,9 @@
 "use client";
 import { budgets } from "../data/data-budgets";
 import { transactions } from "../data/data-transactions";
-import { useState, useEffect } from "react";
+
 import BudgetCircle from "./BudgetCircle";
 export default function SpendingSummary() {
-  const [animated, setAnimated] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setAnimated(true), 100);
-  }, []);
-  // calculate spent per budget category
   const budgetsWithSpent = budgets.map((budget) => {
     const spent = transactions
       .filter((t) => t.category === budget.category)
@@ -37,7 +31,7 @@ export default function SpendingSummary() {
     .join(", ");
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 p-6 bg-white rounded-xl w-full max-w-3xl">
+    <div className="flex flex-col md:flex-row gap-8 p-6 bg-white rounded-xl w-full max-w-3xl xl:flex-col">
       {/* LEFT - CHART */}
       <BudgetCircle
         totalLimit={total}
@@ -51,7 +45,7 @@ export default function SpendingSummary() {
           Spending Summary
         </h2>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 xl:w-[360px]">
           {budgetsWithSpent.map((b, i) => (
             <div key={i} className="flex justify-between items-center">
               {/* title */}
