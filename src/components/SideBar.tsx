@@ -44,13 +44,14 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <>
+    <div className="flex min-h-screen bg-[#201F24]">
       {/* ================= XL SIDEBAR ================= */}
       <aside
         className={`
           hidden xl:flex flex-col h-screen bg-[#201F24]
           rounded-r-2xl transition-all duration-500 ease-in-out
           ${collapsed ? "w-[88px]" : "w-[300px]"}
+          
         `}
       >
         {/* LOGO */}
@@ -108,11 +109,14 @@ export default function Sidebar() {
                   height={24}
                 />
 
-                {!collapsed && (
-                  <span className="font-semibold whitespace-nowrap">
-                    {item.label}
-                  </span>
-                )}
+                <div
+                  className={`
+    overflow-hidden transition-all duration-300
+    ${collapsed ? "w-0 opacity-0" : "w-auto opacity-100"}
+  `}
+                >
+                  <span className="whitespace-nowrap">{item.label}</span>
+                </div>
               </button>
             );
           })}
@@ -206,6 +210,6 @@ export default function Sidebar() {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
