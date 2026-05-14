@@ -18,3 +18,9 @@ export type BudgetWithData = Budget & {
   percentage: number;
   transactions: Transaction[];
 };
+export type Pot = {
+  name: string;
+  target: number;
+  total: number;
+  theme: string;
+};
