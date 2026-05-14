@@ -1,14 +1,15 @@
 import { budgets } from "../data/data-budgets";
 import { calculateBudgets } from "../utils/calcBudgets";
 import { BudgetWithData } from "../types/types";
+
 import Image from "next/image";
 export default function BudgetCard() {
   const budgetsWithData = calculateBudgets(budgets);
+
   return (
     <div className="flex flex-col gap-6 ">
       {budgetsWithData.map((budget: BudgetWithData, index) => {
         const { transactions, spent, free, percentage } = budget;
-        console.log(transactions[0].avatar);
 
         return (
           <div
@@ -37,7 +38,9 @@ export default function BudgetCard() {
                 </h2>
               </div>
 
-              <button className="text-[#696868] text-lg">...</button>
+              <button className="text-[#696868] text-lg cursor-pointer">
+                ...
+              </button>
             </div>
 
             {/* MAX + PROGRESS */}
@@ -49,14 +52,13 @@ export default function BudgetCard() {
               {/* PROGRESS BAR */}
               <div className="bg-[#F8F4F0] rounded-[4px] p-1 h-8 overflow-hidden">
                 <div
-                  className="h-full rounded-[4px] transition-all duration-300"
+                  className="h-full rounded-[4px] transition-all duration-1000 ease-out animate-progress"
                   style={{
                     width: `${percentage}%`,
                     backgroundColor: budget.theme,
                   }}
                 />
               </div>
-
               {/* SPENT / FREE */}
               <div className="flex gap-4">
                 {/* SPENT */}

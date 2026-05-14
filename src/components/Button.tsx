@@ -13,6 +13,7 @@ export default function Button({ text }: ButtonProps) {
         p-4
         bg-[#201F24]
         rounded-[8px]
+        cursor-pointer
       "
     >
       <p className="text-white text-[14px] leading-[150%] font-bold capitalize">

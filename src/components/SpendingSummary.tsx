@@ -31,8 +31,9 @@ export default function SpendingSummary() {
     .join(", ");
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 p-6 bg-white rounded-xl w-full max-w-3xl xl:flex-col">
+    <div className="flex flex-col md:flex-row gap-8 p-6 bg-white rounded-xl w-full max-w-3xl xl:flex-col xl:items-center">
       {/* LEFT - CHART */}
+
       <BudgetCircle
         totalLimit={total}
         totalSpent={totalSpent}
