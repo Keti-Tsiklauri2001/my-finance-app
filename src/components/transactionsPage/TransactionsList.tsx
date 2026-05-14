@@ -11,6 +11,9 @@ type Props = {
 };
 
 export default function TransactionsList({ transactions }: Props) {
+  function formatDate(dateString: string) {
+    return dateString.split("T")[0];
+  }
   return (
     <div className="flex flex-col gap-4 w-full max-w-[996px] mx-auto">
       {transactions.map((tx, index) => (
@@ -22,18 +25,20 @@ export default function TransactionsList({ transactions }: Props) {
                 <Image src={tx.avatar} alt={tx.name} fill />
               </div>
 
-              <div className="flex flex-col">
-                <p className="font-bold text-sm text-[#201F24] truncate">
-                  {tx.name}
-                </p>
+              <div className="flex flex-col md:flex-row md:w-[300px] md:justify-between">
+                <p className="font-bold text-sm text-[#201F24] ">{tx.name}</p>
 
-                <p className="text-xs text-[#696868]">{tx.category}</p>
+                <p className="text-xs text-[#696868] whitespace-nowrap ">
+                  {tx.category}
+                </p>
               </div>
             </div>
 
             {/* DATE + AMOUNT */}
             <div className="flex flex-col md:flex-row md:w-[300px] md:justify-between">
-              <div className="text-xs text-[#696868]">{tx.date}</div>
+              <div className="text-xs text-[#696868]">
+                {formatDate(tx.date)}
+              </div>
 
               <div
                 className={`font-bold text-sm ${
