@@ -71,7 +71,7 @@ function Pagination({ page, setPage, totalPages }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex items-center justify-between pt-6 gap-2 w-full">
+    <div className="flex items-center justify-between pt-6 gap-2 w-full ">
       {/* PREV */}
       <PaginationButton
         buttonText="Prev"

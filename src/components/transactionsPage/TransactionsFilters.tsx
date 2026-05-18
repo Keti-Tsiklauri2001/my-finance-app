@@ -34,7 +34,9 @@ export default function TransactionsFilters({
             className="w-full outline-none text-sm text-gray-700"
           />
 
-          <div className="w-4 h-4 ml-2 text-gray-500">🔍</div>
+          <div className="w-4 h-4 ml-2 text-gray-500">
+            {/* <Image alt="search" width="16px" height="16px" src /> */}
+          </div>
         </div>
       </div>
 

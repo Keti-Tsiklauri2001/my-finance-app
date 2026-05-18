@@ -272,6 +272,14 @@ export const transactions = [
     recurring: false,
   },
   {
+    avatar: "/images/avatars/savory-bites-bistro.jpg",
+    name: "Savory Bites Bistro",
+    category: "Dining Out",
+    date: "2024-08-19T20:23:11Z",
+    amount: -55.5,
+    recurring: false,
+  },
+  {
     avatar: "/images/avatars/liam-hughes.jpg",
     name: "Liam Hughes",
     category: "Groceries",

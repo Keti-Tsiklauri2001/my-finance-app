@@ -148,7 +148,7 @@ export default function Sidebar() {
       </aside>
 
       {/* ================= MD TABLET ================= */}
-      <div className="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 xl:hidden w-[100%] h-[74px] bg-[#201F24] items-center justify-center rounded-xl">
+      <div className="hidden md:flex fixed bottom-0 left-1/2 -translate-x-1/2 xl:hidden w-full h-[74px] bg-[#201F24] items-center justify-center rounded-xl">
         <div className="flex gap-10">
           {menuItems.map((item) => {
             const isActive = pathname === item.href;

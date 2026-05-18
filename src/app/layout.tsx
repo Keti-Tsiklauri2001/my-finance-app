@@ -15,11 +15,13 @@ export default function RootLayout({
           <main
             id="main-content"
             className="
-              flex-1
-              transition-all
-              duration-500
-              min-w-0
-            "
+    flex-1
+    transition-all
+    duration-500
+    min-w-0
+    pb-[90px]
+    xl:pb-0
+  "
           >
             {children}
           </main>

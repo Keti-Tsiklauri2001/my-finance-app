@@ -21,7 +21,7 @@ export default function Transactions() {
   } = useTransactions(transactions);
 
   return (
-    <div>
+    <div className="flex flex-col gap-6">
       <Header header="transactions" />
 
       <TransactionsFilters
