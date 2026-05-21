@@ -1,7 +1,9 @@
-import { transactions } from "../data/data-transactions";
-import { Budget, BudgetWithData } from "../types/types";
+import { Budget, BudgetWithData, Transaction } from "../types/types";
 
-export function calculateBudgets(budgets: Budget[]): BudgetWithData[] {
+export function calculateBudgets(
+  budgets: Budget[],
+  transactions: Transaction[],
+): BudgetWithData[] {
   return budgets.map((budget) => {
     const filtered = transactions.filter((t) => t.category === budget.category);
 

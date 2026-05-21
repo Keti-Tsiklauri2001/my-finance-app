@@ -3,9 +3,13 @@ import Button from "./Button";
 type HeaderProps = {
   header: string;
   buttonText?: string;
+  onButtonClick?: () => void;
 };
-
-export default function Header({ header, buttonText }: HeaderProps) {
+export default function Header({
+  header,
+  buttonText,
+  onButtonClick,
+}: HeaderProps) {
   return (
     <div
       className="
@@ -28,7 +32,7 @@ export default function Header({ header, buttonText }: HeaderProps) {
         {header}
       </p>
 
-      {buttonText && <Button text={buttonText} />}
+      {buttonText && <Button text={buttonText} onClick={onButtonClick} />}
     </div>
   );
 }

@@ -1,8 +1,9 @@
 type ButtonProps = {
   text: string;
+  onClick?: () => void;
 };
 
-export default function Button({ text }: ButtonProps) {
+export default function Button({ text, onClick }: ButtonProps) {
   return (
     <button
       className="
@@ -15,6 +16,7 @@ export default function Button({ text }: ButtonProps) {
         rounded-[8px]
         cursor-pointer
       "
+      onClick={onClick}
     >
       <p className="text-white text-[14px] leading-[150%] font-bold capitalize">
         {text}
