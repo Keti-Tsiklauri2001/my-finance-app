@@ -44,7 +44,7 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-[#201F24]">
+    <div className="flex min-h-screen bg-[#201F24] z-50">
       {/* ================= XL SIDEBAR ================= */}
       <aside
         className={`

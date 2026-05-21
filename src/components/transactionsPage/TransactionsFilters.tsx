@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import Image from "next/image";
 
 type FilterType = "all" | "income" | "expense";
 type SortType = "latest" | "oldest" | "highest" | "lowest";
@@ -22,10 +23,13 @@ export default function TransactionsFilters({
   search,
   setSearch,
 }: TransactionsFiltersProps) {
+  const [openFilter, setOpenFilter] = useState(false);
+  const [openSort, setOpenSort] = useState(false);
+
   return (
     <div className="flex justify-between items-center w-full gap-4">
-      {/* LEFT: Search */}
-      <div className="flex flex-col w-[320px]">
+      {/* SEARCH */}
+      <div className="flex flex-col w-[220px]">
         <div className="relative flex items-center border border-gray-300 rounded-lg px-4 py-2 h-[45px]">
           <input
             value={search}
@@ -33,44 +37,72 @@ export default function TransactionsFilters({
             placeholder="Search transaction"
             className="w-full outline-none text-sm text-gray-700"
           />
-
-          <div className="w-4 h-4 ml-2 text-gray-500">
-            {/* <Image alt="search" width="16px" height="16px" src /> */}
-          </div>
         </div>
       </div>
 
-      {/* RIGHT: Sort + Filter */}
+      {/* SORT + FILTER */}
       <div className="flex items-center gap-6">
         {/* SORT */}
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-500">Sort by</span>
-
+        <div className="relative">
           <select
             value={sort}
-            onChange={(e) => setSort(e.target.value as SortType)}
-            className="border border-gray-300 rounded-lg px-3 py-2 h-[45px] text-sm"
+            onChange={(e) => {
+              setSort(e.target.value as SortType);
+              setOpenSort(false);
+            }}
+            onClick={() => setOpenSort((p) => !p)}
+            onBlur={() => setOpenSort(false)}
+            className="appearance-none border border-gray-300 rounded-lg px-3 py-2 pr-10 h-[45px] text-sm bg-white"
           >
             <option value="latest">Latest</option>
             <option value="oldest">Oldest</option>
             <option value="highest">Highest</option>
             <option value="lowest">Lowest</option>
           </select>
+
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            <Image
+              src={
+                openSort
+                  ? "/images/icon-caret-up.svg"
+                  : "/images/icon-caret-down.svg"
+              }
+              alt="caret"
+              width={12}
+              height={12}
+            />
+          </div>
         </div>
 
         {/* FILTER */}
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-500">Filter</span>
-
+        <div className="relative">
           <select
             value={filter}
-            onChange={(e) => setFilter(e.target.value as FilterType)}
-            className="border border-gray-300 rounded-lg px-3 py-2 h-[45px] text-sm"
+            onChange={(e) => {
+              setFilter(e.target.value as FilterType);
+              setOpenFilter(false);
+            }}
+            onClick={() => setOpenFilter((p) => !p)}
+            onBlur={() => setOpenFilter(false)}
+            className="appearance-none border border-gray-300 rounded-lg px-3 py-2 pr-10 h-[45px] text-sm bg-white"
           >
             <option value="all">All</option>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
+
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            <Image
+              src={
+                openFilter
+                  ? "/images/icon-caret-up.svg"
+                  : "/images/icon-caret-down.svg"
+              }
+              alt="caret"
+              width={12}
+              height={12}
+            />
+          </div>
         </div>
       </div>
     </div>

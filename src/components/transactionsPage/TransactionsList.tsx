@@ -22,9 +22,14 @@ export default function TransactionsList({ transactions }: Props) {
             {/* LEFT */}
             <div className="flex items-center gap-3 flex-1 min-w-0">
               <div className="w-10 h-10 rounded-full overflow-hidden bg-[#F8F4F0] relative shrink-0">
-                <Image src={tx.avatar} alt={tx.name} fill />
+                <Image
+                  src={tx.avatar}
+                  alt={tx.name}
+                  width={40}
+                  height={40}
+                  className="rounded-full object-cover"
+                />
               </div>
-
               <div className="flex flex-col md:flex-row md:w-[300px] md:justify-between">
                 <p className="font-bold text-sm text-[#201F24] ">{tx.name}</p>
 

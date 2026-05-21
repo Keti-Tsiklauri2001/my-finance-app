@@ -31,15 +31,15 @@ function PaginationButton({
           <Image
             src="/images/icon-caret-right.svg"
             alt="caret"
-            width={12}
-            height={12}
+            width={8}
+            height={8}
           />
         ) : (
           <Image
             src="/images/icon-caret-left.svg"
             alt="caret"
-            width={12}
-            height={12}
+            width={8}
+            height={8}
           />
         )}
       </span>
