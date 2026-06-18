@@ -16,6 +16,22 @@ export default function TransactionsList({ transactions }: Props) {
   }
   return (
     <div className="flex flex-col gap-4 w-full max-w-[996px] mx-auto">
+      <div className="hidden md:flex items-center px-4 pb-4 text-xs font-bold text-[#696868] uppercase">
+        {/* LEFT (same as row left) */}
+        <div className="flex items-center gap-3 flex-1 min-w-0">
+          <div className="w-10 h-10 shrink-0" />
+          <div className="flex flex-col md:flex-row md:w-[300px] md:justify-between w-full">
+            <span>Recipient / Sender</span>
+            <span>Category</span>
+          </div>
+        </div>
+
+        {/* RIGHT (same as row right) */}
+        <div className="flex flex-col md:flex-row md:w-[300px] md:justify-between ml-auto">
+          <span>Transaction Date</span>
+          <span>Amount</span>
+        </div>
+      </div>
       {transactions.map((tx, index) => (
         <div key={index}>
           <div className="flex items-center justify-between gap-4 px-4 py-2 rounded-lg">

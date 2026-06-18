@@ -27,16 +27,27 @@ export default function TransactionsFilters({
   const [openSort, setOpenSort] = useState(false);
 
   return (
-    <div className="flex justify-between items-center w-full gap-4">
+    <div className="flex justify-between items-center w-[95%] gap-4 mx-auto">
       {/* SEARCH */}
       <div className="flex flex-col w-[220px]">
         <div className="relative flex items-center border border-gray-300 rounded-lg px-4 py-2 h-[45px]">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search transaction"
-            className="w-full outline-none text-sm text-gray-700"
-          />
+          <div className="w-full">
+            {/* Mobile */}
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search"
+              className="block md:hidden w-full outline-none text-sm text-gray-700"
+            />
+
+            {/* Desktop */}
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search transaction"
+              className="hidden md:block w-full outline-none text-sm text-gray-700"
+            />
+          </div>
         </div>
       </div>
 
