@@ -3,9 +3,10 @@ import { BudgetWithData } from "../types/types";
 
 interface Props {
   budgetsWithData: BudgetWithData[];
+  onEdit: (budget: BudgetWithData) => void;
 }
 
-export default function BudgetCard({ budgetsWithData }: Props) {
+export default function BudgetCard({ budgetsWithData, onEdit }: Props) {
   return (
     <div className="flex flex-col gap-6 ">
       {budgetsWithData.map((budget, index) => {
@@ -38,7 +39,10 @@ export default function BudgetCard({ budgetsWithData }: Props) {
                 </h2>
               </div>
 
-              <button className="text-[#696868] text-lg cursor-pointer">
+              <button
+                className="text-[#696868] text-lg cursor-pointer"
+                onClick={() => onEdit(budget)}
+              >
                 ...
               </button>
             </div>
