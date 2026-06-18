@@ -2,9 +2,11 @@ import { Pot } from "../types/types";
 
 type PotCardProps = {
   pot: Pot;
+  onAdd: () => void;
+  onWithdraw: () => void;
 };
 
-export default function PotCard({ pot }: PotCardProps) {
+export default function PotCard({ pot, onAdd, onWithdraw }: PotCardProps) {
   return (
     <div className="bg-white rounded-xl p-6 flex flex-col gap-8 w-[343px] md:w-[700px] xl:w-[500px]">
       {/* Header */}
@@ -51,11 +53,17 @@ export default function PotCard({ pot }: PotCardProps) {
 
       {/* Buttons */}
       <div className="flex gap-4">
-        <button className="flex-1 bg-[#F8F4F0] rounded-lg py-4 font-bold text-sm cursor-pointer hover:bg-amber-100">
+        <button
+          onClick={onAdd}
+          className="flex-1 bg-[#F8F4F0] rounded-lg py-4 font-bold text-sm cursor-pointer hover:bg-amber-100"
+        >
           + Add Money
         </button>
 
-        <button className="flex-1 bg-[#F8F4F0] rounded-lg py-4 font-bold text-sm cursor-pointer cursor-pointer hover:bg-amber-100">
+        <button
+          onClick={onWithdraw}
+          className="flex-1 bg-[#F8F4F0] rounded-lg py-4 font-bold text-sm cursor-pointer cursor-pointer hover:bg-amber-100"
+        >
           Withdraw
         </button>
       </div>

@@ -28,7 +28,7 @@ export default function Pots() {
         onButtonClick={() => setShowAddPotModal(true)}
       />
 
-      <PotsList pots={pots} />
+      <PotsList pots={pots} setPots={setPots} />
     </div>
   );
 }
