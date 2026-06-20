@@ -27,7 +27,7 @@ export default function TransactionsFilters({
   const [openSort, setOpenSort] = useState(false);
 
   return (
-    <div className="flex justify-between items-center w-[95%] gap-4 mx-auto">
+    <div className="flex justify-between items-center w-[90%] xl:w-[1000px] gap-4 mx-auto">
       {/* SEARCH */}
       <div className="flex flex-col w-[220px]">
         <div className="relative flex items-center border border-gray-300 rounded-lg px-4 py-2 h-[45px]">
@@ -52,7 +52,7 @@ export default function TransactionsFilters({
       </div>
 
       {/* SORT + FILTER */}
-      <div className="flex items-center gap-6">
+      <div className="flex items-center  gap-3 md:gap-6">
         {/* SORT */}
         <div className="relative">
           <select
@@ -63,7 +63,7 @@ export default function TransactionsFilters({
             }}
             onClick={() => setOpenSort((p) => !p)}
             onBlur={() => setOpenSort(false)}
-            className="appearance-none border border-gray-300 rounded-lg px-3 py-2 pr-10 h-[45px] text-sm bg-white"
+            className="appearance-none border border-gray-300 rounded-lg px-3 py-2 pr-6 md:pr-10 h-[45px] text-sm bg-white"
           >
             <option value="latest">Latest</option>
             <option value="oldest">Oldest</option>
@@ -95,7 +95,7 @@ export default function TransactionsFilters({
             }}
             onClick={() => setOpenFilter((p) => !p)}
             onBlur={() => setOpenFilter(false)}
-            className="appearance-none border border-gray-300 rounded-lg px-3 py-2 pr-10 h-[45px] text-sm bg-white"
+            className="appearance-none border border-gray-300 rounded-lg px-3 py-2 pr-4 pr-10 h-[45px] text-sm bg-white"
           >
             <option value="all">All</option>
             <option value="income">Income</option>

@@ -18,7 +18,7 @@ export default function Header({
         gap-6
         w-[343px]
         md:w-[688px]
-        xl:w-[1060px]
+        xl:w-[1200px]
         max-w-[1440px]
         h-[56px]
         self-stretch
