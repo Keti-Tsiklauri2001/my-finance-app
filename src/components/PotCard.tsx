@@ -5,6 +5,7 @@ type PotCardProps = {
   onAdd: () => void;
   onWithdraw: () => void;
   onEdit: () => void;
+  onDelete: () => void;
 };
 
 export default function PotCard({
@@ -12,6 +13,7 @@ export default function PotCard({
   onAdd,
   onWithdraw,
   onEdit,
+  onDelete,
 }: PotCardProps) {
   return (
     <div className="bg-white rounded-xl p-6 flex flex-col gap-8 w-[343px] md:w-[700px] xl:w-[500px]">
@@ -25,10 +27,17 @@ export default function PotCard({
 
           <h2 className="text-[20px] font-bold text-[#201F24]">{pot.name}</h2>
         </div>
-
-        <button className="cursor-pointer" onClick={onEdit}>
-          •••
-        </button>
+        <div className="w-[100px] flex flex-row justify-between">
+          <button
+            onClick={onDelete}
+            className=" cursor-pointer hover:opacity-70"
+          >
+            Delete
+          </button>
+          <button className="cursor-pointer" onClick={onEdit}>
+            Edit
+          </button>
+        </div>
       </div>
 
       {/* Saved */}
