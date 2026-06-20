@@ -1,51 +1,76 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import BudgetCard from "@/src/components/BudgetsCard";
 import Header from "@/src/components/Header";
 import SpendingSummary from "@/src/components/SpendingSummary";
 import AddBudgetModal from "@/src/components/AddBudgetModal";
+import EditBudgetModal from "@/src/components/EditBudgetModal";
+
 import { transactions } from "@/src/data/data-transactions";
 import { calculateBudgets } from "@/src/utils/calcBudgets";
 import { budgets as initialBudgets } from "@/src/data/data-budgets";
-import { BudgetWithData } from "@/src/types/types";
-import EditBudgetModal from "@/src/components/EditBudgetModal";
+
+import { Budget, BudgetWithData } from "@/src/types/types";
+
+const STORAGE_KEY = "budgets";
 
 export default function Budgets() {
-  const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const [budgets, setBudgets] = useState(initialBudgets);
-  const [tx, setTx] = useState(transactions);
+  const [budgets, setBudgets] = useState<Budget[]>(initialBudgets);
+
+  const [open, setOpen] = useState(false);
+  const [tx] = useState(transactions);
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedBudget, setSelectedBudget] = useState<BudgetWithData | null>(
     null,
   );
 
-  const budgetsWithData = calculateBudgets(budgets, tx);
+  // ✅ ONLY run after mount
   useEffect(() => {
-    console.log("BUDGET STATE CHANGED:", budgets);
-  }, [budgets]);
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (saved) {
+      setBudgets(JSON.parse(saved));
+    }
+
+    setMounted(true);
+  }, []);
+
+  // ✅ save safely
+  useEffect(() => {
+    if (!mounted) return;
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(budgets));
+  }, [budgets, mounted]);
+
+  // ⛔ CRITICAL: prevent hydration mismatch
+  if (!mounted) {
+    return null;
+  }
+
+  const budgetsWithData = calculateBudgets(budgets, tx);
+
   return (
     <div>
-      <div>
-        <Header
-          header="Budgets"
-          buttonText="add new budget"
-          onButtonClick={() => setOpen(true)}
+      <Header
+        header="Budgets"
+        buttonText="add new budget"
+        onButtonClick={() => setOpen(true)}
+      />
+
+      {open && (
+        <AddBudgetModal
+          onClose={() => setOpen(false)}
+          onAdd={(data) => {
+            setBudgets((prev) => [...prev, data]);
+            setOpen(false);
+          }}
         />
+      )}
 
-        {open && (
-          <AddBudgetModal
-            onClose={() => setOpen(false)}
-            onAdd={(data) => {
-              console.log("new budget:", data);
-
-              setBudgets((prev) => [...prev, data]);
-
-              setOpen(false);
-            }}
-          />
-        )}
-      </div>
       {showEditModal && selectedBudget && (
         <EditBudgetModal
           budget={selectedBudget}
@@ -64,7 +89,7 @@ export default function Budgets() {
         />
       )}
 
-      <div className="flex flex-col md:flex-row xl:max-w-[1060px]  w-full mx-auto gap-6">
+      <div className="flex flex-col md:flex-row xl:max-w-[1060px] w-full mx-auto gap-6">
         <div className="flex-1">
           <SpendingSummary />
         </div>
