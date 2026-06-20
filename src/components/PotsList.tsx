@@ -5,6 +5,7 @@ import PotCard from "./PotCard";
 import AddMoneyModal from "./AddMoneyModal";
 import WithdrawModal from "./WithdrawModal";
 import { Pot } from "../types/types";
+import EditPotModal from "./EditPotModal";
 
 type Props = {
   pots: Pot[];
@@ -15,7 +16,11 @@ export default function PotsList({ pots, setPots }: Props) {
   const [selectedPot, setSelectedPot] = useState<Pot | null>(null);
   const [showAdd, setShowAdd] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
-
+  const [showEdit, setShowEdit] = useState(false);
+  const openEdit = (pot: Pot) => {
+    setSelectedPot(pot);
+    setShowEdit(true);
+  };
   const openAdd = (pot: Pot) => {
     setSelectedPot(pot);
     setShowAdd(true);
@@ -35,10 +40,23 @@ export default function PotsList({ pots, setPots }: Props) {
             pot={pot}
             onAdd={() => openAdd(pot)}
             onWithdraw={() => openWithdraw(pot)}
+            onEdit={() => openEdit(pot)}
           />
         ))}
       </div>
+      {showEdit && selectedPot && (
+        <EditPotModal
+          pot={selectedPot}
+          onClose={() => setShowEdit(false)}
+          onSave={(updatedPot) => {
+            setPots((prev) =>
+              prev.map((p) => (p.name === selectedPot.name ? updatedPot : p)),
+            );
 
+            setShowEdit(false);
+          }}
+        />
+      )}
       {/* ADD MONEY MODAL */}
       {showAdd && selectedPot && (
         <AddMoneyModal

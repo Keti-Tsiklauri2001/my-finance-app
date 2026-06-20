@@ -4,9 +4,15 @@ type PotCardProps = {
   pot: Pot;
   onAdd: () => void;
   onWithdraw: () => void;
+  onEdit: () => void;
 };
 
-export default function PotCard({ pot, onAdd, onWithdraw }: PotCardProps) {
+export default function PotCard({
+  pot,
+  onAdd,
+  onWithdraw,
+  onEdit,
+}: PotCardProps) {
   return (
     <div className="bg-white rounded-xl p-6 flex flex-col gap-8 w-[343px] md:w-[700px] xl:w-[500px]">
       {/* Header */}
@@ -20,7 +26,9 @@ export default function PotCard({ pot, onAdd, onWithdraw }: PotCardProps) {
           <h2 className="text-[20px] font-bold text-[#201F24]">{pot.name}</h2>
         </div>
 
-        <button className="cursor-pointer">•••</button>
+        <button className="cursor-pointer" onClick={onEdit}>
+          •••
+        </button>
       </div>
 
       {/* Saved */}
@@ -33,18 +41,20 @@ export default function PotCard({ pot, onAdd, onWithdraw }: PotCardProps) {
 
         {/* Progress */}
         <div className="flex flex-col gap-3">
-          <div className="h-2 bg-[#F8F4F0] rounded-full overflow-hidden">
+          <div className="h-2 bg-[#000000] rounded-full overflow-hidden">
             <div
               className="h-full rounded-full"
               style={{
-                width: `${pot.target}%`,
+                width: `${Math.min((pot.total / pot.target) * 100, 100)}%`,
                 backgroundColor: pot.theme,
               }}
             />
           </div>
 
           <div className="flex justify-between text-xs">
-            <span className="font-bold text-[#696868]">{pot.target}%</span>
+            <span className="font-bold text-[#696868]">
+              {Math.round((pot.total * 100) / pot.target)}%
+            </span>
 
             <span className="text-[#696868]">Target of ${pot.target}</span>
           </div>
