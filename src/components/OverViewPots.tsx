@@ -26,7 +26,7 @@ export default function OverviewPots() {
   const total = pots.reduce((sum, pot) => sum + pot.total, 0);
 
   return (
-    <div className="flex flex-col gap-5 bg-white rounded-xl pt-4 md:pt-8 w-full md:w-[700px] xl:w-[540px]">
+    <div className="flex flex-col gap-5 bg-white rounded-xl pt-4 md:pt-8 w-full md:w-[700px] xl:w-[600px]">
       {/* HEADER */}
       <div className="flex items-center justify-between">
         <h2 className="text-[20px] font-bold text-[#201F24]">Saving Pots</h2>
