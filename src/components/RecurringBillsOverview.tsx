@@ -30,7 +30,7 @@ export default function RecurringBillsOverview() {
 
         <Link
           href="/recurring-bills"
-          className="flex items-center gap-2 text-sm text-[#696868] hover:text-[#201F24]"
+          className="flex items-center gap-2 text-sm text-[#696868]"
         >
           See Details
           <span>›</span>

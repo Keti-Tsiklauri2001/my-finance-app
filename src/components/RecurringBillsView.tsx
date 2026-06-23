@@ -20,7 +20,8 @@ function formatDate(dateString: string) {
 export default function RecurringBillsView() {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("latest");
-
+  const [openFilter, setOpenFilter] = useState(false);
+  console.log(openFilter);
   const bills = useMemo(() => {
     return transactions
       .filter((t) => t.recurring)
@@ -70,18 +71,33 @@ export default function RecurringBillsView() {
           placeholder="Search bills"
           className="border border-[#98908B] rounded-lg px-4 py-3 w-[150px] md:w-[320px] outline-none"
         />
+        <div className="relative">
+          <select
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+            onClick={() => setOpenFilter((p) => !p)}
+            className="border border-[#98908B] rounded-lg px-3 py-3 text-sm pr-8 cursor-pointer appearance-none"
+          >
+            <option value="latest">Latest</option>
+            <option value="oldest">Oldest</option>
+            <option value="highest">Highest</option>
+            <option value="lowest">Lowest</option>
+          </select>
 
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            <Image
+              src={
+                openFilter
+                  ? "/images/icon-caret-up.svg"
+                  : "/images/icon-caret-down.svg"
+              }
+              alt="caret"
+              width={12}
+              height={12}
+            />
+          </div>
+        </div>
         {/* SORT */}
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
-          className="border border-[#98908B] rounded-lg px-3 py-3 text-sm "
-        >
-          <option value="latest">Latest</option>
-          <option value="oldest">Oldest</option>
-          <option value="highest">Highest</option>
-          <option value="lowest">Lowest</option>
-        </select>
       </div>
 
       {/* TABLE HEADER */}

@@ -39,7 +39,7 @@ export default function EditPotModal({
             Edit Pot
           </h1>
 
-          <button onClick={onClose}>
+          <button onClick={onClose} className="cursor-pointer">
             <Image
               src="/images/icon-close.svg"
               alt="close"
