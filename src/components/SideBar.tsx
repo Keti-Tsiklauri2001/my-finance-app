@@ -136,7 +136,7 @@ export default function Sidebar() {
             alt="sidebar"
             width={20}
             height={20}
-            src="/images/minimize-Sidebar.svg"
+            src="/images/budgets.svg"
             className={`
               transition-transform duration-500
               ${collapsed ? "rotate-180" : ""}
