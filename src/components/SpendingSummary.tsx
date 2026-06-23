@@ -31,7 +31,7 @@ export default function SpendingSummary() {
     .join(", ");
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 p-6 bg-white rounded-xl w-full max-w-3xl xl:flex-col xl:items-center">
+    <div className="flex flex-col md:flex-row gap-8 p-4 md:p-6 bg-white rounded-xl w-full max-w-3xl xl:flex-col xl:items-center">
       {/* LEFT - CHART */}
 
       <BudgetCircle
@@ -41,12 +41,12 @@ export default function SpendingSummary() {
       />
 
       {/* RIGHT - LIST */}
-      <div className="flex-1">
+      <div className="flex-1 mx-auto">
         <h2 className="text-xl font-bold text-[#201F24] mb-6">
           Spending Summary
         </h2>
 
-        <div className="flex flex-col gap-4 xl:w-[360px]">
+        <div className="flex flex-col gap-4 mx-auto w-[340px] xl:w-[360px]">
           {budgetsWithSpent.map((b, i) => (
             <div key={i} className="flex justify-between items-center">
               {/* title */}

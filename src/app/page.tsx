@@ -13,14 +13,14 @@ export default function Home() {
     <div>
       <Header header="Overview" />
       <Balance />
-      <div className="flex flex-col md:flex-row ">
+      <div className="flex flex-col xl:flex-row ">
         <div className="flex flex-col mx-auto">
           <OverviewPots />
           <TransactionsOverview />
         </div>
         <div>
           <div className="pt-4 md:pt-8 ">
-            <div className="w-[340px] mx-auto">
+            <div className="w-[340px] md:w-[700px] xl:w-[360px] mx-auto">
               <div className="flex items-center justify-between ">
                 <h2 className="text-[20px] font-bold leading-[120%] text-[#201F24]">
                   My Budgets
